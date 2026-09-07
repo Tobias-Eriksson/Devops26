@@ -1,11 +1,19 @@
 const itemsList = document.getElementById("items");
 const form = document.getElementById("new-item-form");
 const textInput = document.getElementById("item-text");
+const summary = document.getElementById("summary");
 
 async function loadItems() {
   const response = await fetch("/api/items");
   const items = await response.json();
   renderItems(items);
+  await loadSummary();
+}
+
+async function loadSummary() {
+  const response = await fetch("/api/items/stats");
+  const stats = await response.json();
+  summary.textContent = `${stats.count} notes - ${stats.total_characters} characters`;
 }
 
 function renderItems(items) {
