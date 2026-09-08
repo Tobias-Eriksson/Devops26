@@ -1,4 +1,4 @@
-# Template App — Från commit till produktion
+# Template App — Från commit till produktion - Tobias devcontainer
 
 Det här är startpunkten för ert projekt i DevOps-kursen. Appen är medvetet
 enkel — en liten "notes"-app i två delar — så att kursen kan handla om
