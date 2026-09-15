@@ -23,6 +23,20 @@ def test_create_and_list_item() -> None:
     assert any(item["id"] == created["id"] for item in response.json())
 
 
+def test_get_item() -> None:
+    created = client.post("/api/items", json={"text": "buy bread"}).json()
+
+    response = client.get(f"/api/items/{created['id']}")
+    assert response.status_code == 200
+    assert response.json()["text"] == created["text"]
+    assert response.json()["id"] == created["id"]
+
+
+def test_get_missing_item_returns_404() -> None:
+    response = client.get("/api/items/999999")
+    assert response.status_code == 404
+
+
 def test_delete_item() -> None:
     created = client.post("/api/items", json={"text": "temporary"}).json()
 
